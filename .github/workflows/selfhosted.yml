@@ -23,7 +23,7 @@ on:
           - 'DerpFest 14.0'
           - 'CipherOS 14'
           - 'PixelOS 15'
-          - 'RisingOS 15 Revived'
+          - 'RisingOS 16 Revived'
           - 'LineageOS 18.1'
           - 'LineageOS 16.0'
           - 'CyanogenMOD 14.1'
@@ -178,9 +178,9 @@ jobs:
           export REPO_INIT="repo init -u https://github.com/PixelOS-AOSP/manifest.git -b fifteen --git-lfs --depth=1"
         ;;
         "RisingOS 15 Revived")
-          export PROJECTFOLDER="/crave-devspaces/Rising15"
+          export PROJECTFOLDER="/crave-devspaces/Rising16"
           export PROJECTID="86"
-          export REPO_INIT="repo init -u https://github.com/RisingOS-Revived/android.git -b fifteen --git-lfs --depth=1"
+          export REPO_INIT="repo init -u https://github.com/RisingOS-Revived/android.git -b sixteen --git-lfs --depth=1"
         ;;
         "LineageOS 18.1")
           export PROJECTFOLDER="/crave-devspaces/Lineage18"
@@ -548,13 +548,6 @@ jobs:
         crave pull out/error.log
         echo "Displaying out/error.log"
         cat out/error.log
-
-      # Upload to Telegram
-    - name: Upload Using telegram-upload
-      run: |
-        cd $PROJECTFOLDER
-        crave ssh -- "export TG_UPLOAD_LIMIT="${{ secrets.TG_UPLOAD_LIMIT }}"; bash /opt/crave/telegram/upload.sh '${{ github.event.inputs.DEVICE_NAME }}' '${{ secrets.EXTRA_FILES }}'"
-      continue-on-error: true
 
       # Remove 'crave' clone
     - name: Destroy Crave Clone
